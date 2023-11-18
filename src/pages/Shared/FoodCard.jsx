@@ -3,17 +3,29 @@ import MainBtn from "../../components/MainBtn";
 import useAuthHook from "../../hooks/useAuthHook";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import { axiosSecure } from "../../hooks/useAxiosSecure";
 
 const FoodCard = ({ item }) => {
     const {user} = useAuthHook();
     const navigate = useNavigate();
     const location = useLocation();
-    const { name, recipe, image, price } = item;
+    const { _id, name, recipe, image, price } = item;
 
-    const handleAddToCart = food => {
+    const handleAddToCart = () => {
         if(user && user?.email) {
-            console.log(food);
-            // TOOD: send cart data to server
+            const cartItem = {
+                menuId: _id,
+                email: user.email,
+                name,
+                recipe,
+                image,
+                price
+            }
+            axiosSecure.post("/cart", cartItem)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => console.error(err))
         } else {
             Swal.fire({
                 title: "You are not logged in",
@@ -25,7 +37,7 @@ const FoodCard = ({ item }) => {
                 confirmButtonText: "Yes, Go To Login"
               }).then((result) => {
                 if (result.isConfirmed) {
-                  navigate("/login", {state: {from: location}})
+                  navigate("/login", {state: {from: location}, replace: true})
                 }
               });
         }
@@ -43,7 +55,6 @@ const FoodCard = ({ item }) => {
                     <div className="card-actions">
                         <MainBtn 
                         handleAddToCart={handleAddToCart}
-                        food={item}
                         isBgWhite>Add To Cart</MainBtn>
                     </div>
                 </div>
