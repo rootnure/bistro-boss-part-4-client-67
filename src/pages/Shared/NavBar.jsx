@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import Container from "../../components/Container";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaShoppingCart } from "react-icons/fa";
 import useAuthHook from "../../hooks/useAuthHook";
 import { toast } from "react-toastify";
 import Logo from "../../components/Logo";
@@ -30,11 +30,14 @@ const NavBar = () => {
         <li><NavLink className="hover:text-white hover:scale-110 duration-75" to="/">Home</NavLink></li>
         <li><NavLink className="hover:text-white hover:scale-110 duration-75" to="/menu">Our Menu</NavLink></li>
         <li><NavLink className="hover:text-white hover:scale-110 duration-75" to="/order">Order Now</NavLink></li>
-        <li><NavLink className="hover:text-white hover:scale-110 duration-75" to="/secret">Secret</NavLink></li>
+        <div className="indicator me-4">
+            <span className="indicator-item badge badge-secondary px-1">{"0"}</span>
+            <li><NavLink className="hover:text-white hover:scale-110 duration-75" to="/cart"><FaShoppingCart className="text-2xl" /></NavLink></li>
+        </div>
         {user ?
             <>
-                <span>{user.displayName}</span>
-                <img src={user.photoURL} alt="User Profile Image" className="h-12 rounded-full" />
+                {/* <span>{user.displayName}</span> */}
+                <img src={user.photoURL} alt="User Profile Image" className="h-8 rounded-full" />
                 <li onClick={handleLogOut}><NavLink className="hover:text-white hover:scale-110 duration-75" to="/login">LogOut</NavLink></li>
             </> :
             <>
