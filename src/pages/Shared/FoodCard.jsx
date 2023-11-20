@@ -3,13 +3,14 @@ import MainBtn from "../../components/MainBtn";
 import useAuthHook from "../../hooks/useAuthHook";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
-import { axiosSecure } from "../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const FoodCard = ({ item }) => {
   const { user } = useAuthHook();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
   const { _id, name, recipe, image, price } = item;
 
   const handleAddToCart = () => {
