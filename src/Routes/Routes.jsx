@@ -8,6 +8,7 @@ import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import DashboardLayout from "../Layout/DashboardLayout";
+import Cart from "../pages/Dashboard/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -70,7 +71,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <div>cart</div>,
+        element: <Cart />,
       },
       {
         path: "my-review",

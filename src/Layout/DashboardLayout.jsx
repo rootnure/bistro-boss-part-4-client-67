@@ -18,7 +18,7 @@ const DashboardLayout = () => {
       {/* dashboard sidebar */}
       <div className="w-72 min-h-screen bg-amber-500">
         <Logo />
-        <ul className="menu space-y-4 p-4 uppercase text-base font-cinzel font-semibold">
+        <ul className="menu dashboard space-y-4 p-4 uppercase text-base font-cinzel font-semibold">
           <li>
             <Link
               to="/dashboard"
