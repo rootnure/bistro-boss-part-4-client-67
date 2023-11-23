@@ -47,7 +47,7 @@ const NavBar = () => {
       <li>
         <NavLink
           className="hover:text-white hover:scale-110 duration-75"
-          to="/menu">
+          to="/dashboard">
           Dashboard
         </NavLink>
       </li>
@@ -74,7 +74,7 @@ const NavBar = () => {
               </span>
               <NavLink
                 className="scale-110 hover:scale-125 duration-75"
-                to="/cart">
+                to="/dashboard/cart">
                 <FaShoppingCart className="text-2xl" />
               </NavLink>
             </p>

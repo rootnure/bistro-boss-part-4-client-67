@@ -7,6 +7,7 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import ContactUs from "../pages/ContactUs/ContactUs";
+import DashboardLayout from "../Layout/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,36 @@ export const router = createBrowserRouter([
       {
         path: "register",
         element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [
+      {
+        index: true,
+        element: <div>home</div>,
+      },
+      {
+        path: "reservation",
+        element: <div>reservation</div>,
+      },
+      {
+        path: "payment-history",
+        element: <div>payment-history</div>,
+      },
+      {
+        path: "cart",
+        element: <div>cart</div>,
+      },
+      {
+        path: "my-review",
+        element: <div>my-review</div>,
+      },
+      {
+        path: "my-bookings",
+        element: <div>my-bookings</div>,
       },
     ],
   },
