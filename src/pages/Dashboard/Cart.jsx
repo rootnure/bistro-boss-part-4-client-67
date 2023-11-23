@@ -12,6 +12,7 @@ const Cart = () => {
     (total, currItem) => total + currItem.price,
     0
   );
+
   const handleDeleteItem = (id, name) => {
     Swal.fire({
       title: "Are you sure?",
@@ -32,6 +33,7 @@ const Cart = () => {
       }
     });
   };
+
   return (
     <section className="py-16 bg-gray-100">
       <SectionTitle heading="Wanna Add More?" subHeading="My Cart" />
