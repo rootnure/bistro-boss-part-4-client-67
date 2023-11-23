@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Container from "../../components/Container";
 import { FaBars, FaShoppingCart } from "react-icons/fa";
 import useAuthHook from "../../hooks/useAuthHook";
@@ -10,6 +10,7 @@ const NavBar = () => {
   const { user, logOut } = useAuthHook();
   const navigate = useNavigate();
   const [cart] = useCart();
+  const { pathname } = useLocation();
 
   const handleLogOut = () => {
     logOut().then(() => {
@@ -50,74 +51,94 @@ const NavBar = () => {
           Order Now
         </NavLink>
       </li>
-      <div className="indicator me-4">
-        <span className="indicator-item badge badge-secondary px-1">
-          {cart.length}
-        </span>
-        <li>
-          <NavLink
-            className="hover:text-white hover:scale-110 duration-75"
-            to="/cart">
+      <li>
+        <p className="indicator me-4 hover:text-white">
+          <span className="indicator-item badge badge-secondary px-1">
+            {cart.length}
+          </span>
+          <NavLink className="scale-110 hover:scale-125 duration-75" to="/cart">
             <FaShoppingCart className="text-2xl" />
           </NavLink>
-        </li>
-      </div>
+        </p>
+      </li>
       {user ? (
         <>
-          {/* <span>{user.displayName}</span> */}
-          <img
-            src={user.photoURL}
-            alt="User Profile Image"
-            className="h-8 rounded-full"
-          />
-          <li onClick={handleLogOut}>
-            <NavLink
-              className="hover:text-white hover:scale-110 duration-75"
-              to="/login">
-              LogOut
-            </NavLink>
+          <li className="h-full">
+            <img
+              src={user.photoURL}
+              alt="User Profile Image"
+              className="max-h-9 scale-125 hover:scale-[1.4] duration-75"
+            />
           </li>
         </>
       ) : (
-        <>
-          <li>
-            <NavLink
-              className="hover:text-white hover:scale-110 duration-75"
-              to="/login">
-              Login
-            </NavLink>
-          </li>
-        </>
+        <></>
       )}
     </>
   );
+  console.log(pathname);
+
   return (
     <>
       <div className="bg-black bg-opacity-50 backdrop-blur text-white fixed top-0 z-10 left-0 right-0">
         <Container>
           <div className="navbar">
             <div className="navbar-start">
-              <div className="dropdown">
-                <label tabIndex={0} className="btn btn-ghost lg:hidden text-xl">
-                  <FaBars></FaBars>
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow text-black bg-base-100 rounded-box w-52">
-                  {navItems}
-                </ul>
-              </div>
-              <Logo></Logo>
+              {!pathname.includes("login") && (
+                <div className="dropdown">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost lg:hidden text-xl">
+                    <FaBars />
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow text-black bg-base-100 rounded-box w-52">
+                    {navItems}
+                  </ul>
+                </div>
+              )}
+              <Logo />
             </div>
-            <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1 gap-x-2">{navItems}</ul>
-            </div>
+            {pathname.includes("login") || pathname.includes("register") ? (
+              ""
+            ) : (
+              <>
+                <div className="navbar-center hidden lg:flex">
+                  <ul className="menu menu-horizontal px-1 gap-x-2">
+                    {navItems}
+                  </ul>
+                </div>
+              </>
+            )}
             <div className="navbar-end">
-              <a className="btn">Button</a>
+              {user ? (
+                <>
+                  <button
+                    onClick={handleLogOut}
+                    className="btn btn-outline text-white hover:scale-110 duration-75 hover:bg-transparent hover:border-white uppercase"
+                    to="/login">
+                    LogOut
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    className="btn btn-outline text-white hover:scale-110 duration-75 hover:bg-transparent hover:border-white"
+                    to="/login">
+                    Login
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </Container>
       </div>
+      {pathname.includes("login") || pathname.includes("register") ? (
+        <div className="mb-[76px]"></div>
+      ) : (
+        ""
+      )}
     </>
   );
 };
