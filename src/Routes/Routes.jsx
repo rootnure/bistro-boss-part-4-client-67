@@ -6,6 +6,7 @@ import Order from "../pages/Order/Order";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 export const router = createBrowserRouter([
   {
@@ -17,15 +18,19 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "contact-us",
+        element: <ContactUs />,
+      },
+      {
         path: "menu",
         element: <Menu></Menu>,
       },
       {
-        path: "order/:category",
+        path: "shop/:category",
         element: <Order></Order>,
       },
       {
-        path: "order",
+        path: "shop",
         element: <Order></Order>,
       },
       {

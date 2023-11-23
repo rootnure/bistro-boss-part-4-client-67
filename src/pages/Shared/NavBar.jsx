@@ -40,6 +40,20 @@ const NavBar = () => {
       <li>
         <NavLink
           className="hover:text-white hover:scale-110 duration-75"
+          to="/contact-us">
+          Contact Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className="hover:text-white hover:scale-110 duration-75"
+          to="/menu">
+          Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className="hover:text-white hover:scale-110 duration-75"
           to="/menu">
           Our Menu
         </NavLink>
@@ -47,8 +61,8 @@ const NavBar = () => {
       <li>
         <NavLink
           className="hover:text-white hover:scale-110 duration-75"
-          to="/order">
-          Order Now
+          to="/shop">
+          Our Shop
         </NavLink>
       </li>
       <li>
@@ -76,7 +90,6 @@ const NavBar = () => {
       )}
     </>
   );
-  console.log(pathname);
 
   return (
     <>

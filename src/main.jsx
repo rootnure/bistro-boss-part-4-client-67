@@ -16,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <HelmetProvider>
-          <div className="max-w-[1920px] mx-auto">
+          <div className="max-w-[1920px] mx-auto font-inter">
             <ToastContainer
               position="top-center"
               autoClose={3500}

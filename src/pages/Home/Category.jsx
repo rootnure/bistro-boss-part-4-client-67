@@ -19,7 +19,6 @@ const Category = () => {
     { _id: "bbrCat005", img: categoryImg5, title: "Salads" },
   ];
   const screenWidth = window.screen.width;
-  console.log(screenWidth);
   return (
     <section>
       <SectionTitle
