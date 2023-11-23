@@ -65,18 +65,20 @@ const NavBar = () => {
           Our Shop
         </NavLink>
       </li>
-      <li>
-        <p className="indicator me-4 hover:text-white">
-          <span className="indicator-item badge badge-secondary px-1">
-            {cart.length}
-          </span>
-          <NavLink className="scale-110 hover:scale-125 duration-75" to="/cart">
-            <FaShoppingCart className="text-2xl" />
-          </NavLink>
-        </p>
-      </li>
       {user ? (
         <>
+          <li>
+            <p className="indicator me-4 hover:text-white">
+              <span className="indicator-item badge badge-secondary px-1">
+                {cart.length}
+              </span>
+              <NavLink
+                className="scale-110 hover:scale-125 duration-75"
+                to="/cart">
+                <FaShoppingCart className="text-2xl" />
+              </NavLink>
+            </p>
+          </li>
           <li className="h-full">
             <img
               src={user.photoURL}

@@ -4,7 +4,7 @@ import bgImg from "../../assets/contact/banner.jpg";
 import Container from "../../components/Container";
 import SectionTitle from "../Shared/SectionTitle";
 import ContactCard from "./ContactCard";
-import { FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
+import { FaClock, FaLocationDot, FaPhoneVolume } from "react-icons/fa6";
 import ContactForm from "./ContactForm";
 
 const ContactUs = () => {
@@ -25,7 +25,7 @@ const ContactUs = () => {
       _id: "ccc",
       title: "Working Hours",
       description: "Mon - Fri: 08:00 - 22:00\n Sat - Sun: 10:00 - 23:00",
-      icon: <FaPhoneVolume />,
+      icon: <FaClock className="mx-auto" />,
     },
   ];
   return (
