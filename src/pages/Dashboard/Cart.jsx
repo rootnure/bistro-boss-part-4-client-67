@@ -1,15 +1,36 @@
+import { FaTrashAlt } from "react-icons/fa";
 import useCart from "../../hooks/useCart";
 import SectionTitle from "../Shared/SectionTitle";
-import { RiDeleteBin6Line } from "react-icons/ri";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  const [cart] = useCart();
+  const [cart, refetch] = useCart();
+  const axiosSecure = useAxiosSecure();
   const totalPrice = cart.reduce(
     (total, currItem) => total + currItem.price,
     0
   );
-  const handleDeleteItem = (id) => {
-    console.log(id);
+  const handleDeleteItem = (id, name) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/cart/${id}`).then(({ data }) => {
+          if (data.deletedCount > 0) {
+            toast.success(`"${name}" successfully deleted from the cart`);
+            refetch();
+          }
+        });
+      }
+    });
   };
   return (
     <section className="py-16 bg-gray-100">
@@ -44,7 +65,7 @@ const Cart = () => {
                       <img
                         src={image}
                         alt={`${name} image`}
-                        className="mx-auto max-w-full max-h-full"
+                        className="mx-auto max-w-full max-h-full rounded-xl"
                       />
                     </figure>
                   </td>
@@ -52,10 +73,10 @@ const Cart = () => {
                   <td className="text-center">${price.toFixed(2)}</td>
                   <th>
                     <button
-                      onClick={() => handleDeleteItem(_id)}
+                      onClick={() => handleDeleteItem(_id, name)}
                       title={`Delete ${name} from cart`}
                       className="btn bg-red-600 hover:bg-red-700 text-white text-2xl">
-                      <RiDeleteBin6Line />
+                      <FaTrashAlt />
                     </button>
                   </th>
                 </tr>
